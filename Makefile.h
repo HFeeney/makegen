@@ -18,4 +18,11 @@ struct Makefile {
     vector<string> mains;  // roots of files with main functions
     vector<string> non_mains;  // roots of files without main functions
     vector<string> prod_rules;  // rules for compiling objects
+
+    // default values for important variables
+    Makefile() : 
+        cc("gcc"),
+        gcc("g++"),
+        bflags("-O2"),
+        dflags("-g -Og") { }
 };
