@@ -1,6 +1,14 @@
+#include <iostream>
+#include <cstdlib>
+#include <stdexcept>
+
 #include "Reader.h"
 #include "Crawler.h"
 #include "Writer.h"
+
+using std::cout;
+using std::endl;
+using std::runtime_error;
 
 // Initialize the makefile struct
     // Check if a makefile exists already
@@ -15,8 +23,29 @@
                 // line.
 
 int main(int argc, char** argv) {
-    // read
-    // crawl
-    // write
-    return 0;
+    try {
+        Makefile m;
+        if (argc != 1) {
+            if (!(argc == 2 && argv[2][0] == '-' && argv[2][1] == 'n' && argv[2][2] == '\0')) {
+                // invalid
+                cout << "Usage: " << argv[0] << endl;
+                return EXIT_FAILURE;
+            }
+            // force new
+        } else {
+            // try read
+            m = read_makefile();
+        }
+
+        // crawl
+        crawl_files(m);
+        // write
+        write_makefile(m);
+    } catch (runtime_error* re) {
+        cout << re->what() << endl;
+        delete re;
+        return EXIT_FAILURE;
+    }
+
+    return EXIT_SUCCESS;
 }
