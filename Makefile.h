@@ -8,6 +8,14 @@
 using std::vector;
 using std::string;
 
+extern string default_cc;
+extern string default_gcc;
+extern string default_cflags;
+extern string default_bflags;
+extern string default_dflags;
+extern string default_lflags;
+extern string default_libs;
+
 struct Makefile {
     string cc;  // C compiler variable
     string gcc;  // C++ compiler variable
@@ -23,8 +31,11 @@ struct Makefile {
 
     // default values for important variables
     Makefile() : 
-        cc("gcc"),
-        gcc("g++"),
-        bflags("-O2"),
-        dflags("-g -Og") { }
+        cc(default_cc),
+        gcc(default_gcc),
+        cflags(default_cflags),
+        bflags(default_bflags),
+        dflags(default_dflags),
+        lflags(default_lflags),
+        libs(default_libs) { }
 };
