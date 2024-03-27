@@ -7,7 +7,8 @@ LFLAGS=
 LIBS=
 
 # setup
-debug: override CFLAGS+=$(DFLAGS) all
+debug: override CFLAGS+=$(DFLAGS)
+debug: all
 
 build: override CFLAGS+=$(BFLAGS)
 build: all

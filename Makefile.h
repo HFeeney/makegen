@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 
+#include "Filename.h"
+
 using std::vector;
 using std::string;
 
@@ -15,8 +17,8 @@ struct Makefile {
     string lflags;  // linker flags variable
     string libs;  // linker appending libraries variable
 
-    vector<string> mains;  // roots of files with main functions
-    vector<string> non_mains;  // roots of files without main functions
+    vector<Filename> mains;  // roots of files with main functions
+    vector<Filename> non_mains;  // roots of files without main functions
     vector<string> prod_rules;  // rules for compiling objects
 
     // default values for important variables
