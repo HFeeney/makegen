@@ -16,7 +16,7 @@ build: all
 all: makegen
 
 makegen: makegen.o Writer.o
-	$(GCC) $(LFLAGS) -o makegen $^ $(LIBS)
+	$(GCC) $(LFLAGS) -o $@ $^ $(LIBS)
 
 makegen.o: makegen.cc Makefile.h
 	$(GCC) $(CFLAGS) -c -o $@ $<
