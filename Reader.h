@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Makefile.h"
 
 // reads the current directory for a makefile

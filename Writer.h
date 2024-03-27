@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Makefile.h"
 
 // writes the gven makefile struct to a file

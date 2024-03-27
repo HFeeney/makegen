@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Makefile.h"
 
 // Iterate through all files in the current directory.

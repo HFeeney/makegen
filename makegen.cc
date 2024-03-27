@@ -1,4 +1,6 @@
-
+#include "Reader.h"
+#include "Crawler.h"
+#include "Writer.h"
 
 // Initialize the makefile struct
     // Check if a makefile exists already

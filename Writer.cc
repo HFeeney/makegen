@@ -18,7 +18,22 @@ bool requiresGCC(string& rule) {
     while (*str) {
         if (*str == '.') {
             if (*(str + 1) == 'c') {
-                if ((*(str + 2) == 'c' && *(str + 3) == ' ') || (*(str + 2) == 'p' && *(str + 3) == 'p') && *(str + 4) == ' ') {
+                // .cc
+                if (*(str + 2) == 'c' && (*(str + 3) == ' ' || *(str + 3) == '\0')) {
+                    return true;
+                }
+                // .cpp
+                else if (*(str + 2) == 'p' && *(str + 3) == 'p' && (*(str + 4) == ' ' || *(str + 4) == '\0')) {
+                    return true;
+                }
+            }
+            else if (*(str + 1) == 'h') {
+                // .hh
+                if (*(str + 2) == 'h' && (*(str + 3) == ' ' || *(str + 3) == '\0')) {
+                    return true;
+                }
+                // .hpp
+                else if (*(str + 2) == 'p' && *(str + 3) == 'p' && (*(str + 4) == ' ' || *(str + 4) == '\0')) {
                     return true;
                 }
             }
@@ -85,6 +100,10 @@ void write_makefile(Makefile& MFstruct) {
     }
 
     MFfile << "clean:" << endl;
-    MFfile << "\t/bin/rm -f makegen *.o" << endl;
+    MFfile << "\t/bin/rm -f *.o";
+    for (auto& main : MFstruct.mains) {
+        MFfile << " " << main;
+    }
+    MFfile << endl;
     MFfile.close();
 }

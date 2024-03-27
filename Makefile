@@ -6,7 +6,6 @@ BFLAGS=-O2
 LFLAGS=
 LIBS=
 
-# setup
 debug: override CFLAGS+=$(DFLAGS)
 debug: all
 
@@ -25,4 +24,4 @@ Writer.o: Writer.cc Writer.h
 	$(GCC) $(CFLAGS) -c -o $@ $<
 
 clean:
-	/bin/rm -f makegen *.o
+	/bin/rm -f *.o makegen
