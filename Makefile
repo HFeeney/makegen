@@ -7,18 +7,20 @@ LFLAGS=
 LIBS=
 
 # setup
-debug: override CFLAGS+=$(DFLAGS)
-debug: all
+debug: override CFLAGS+=$(DFLAGS) all
 
 build: override CFLAGS+=$(BFLAGS)
 build: all
 
 all: makegen
 
-makegen: makegen.o
-	$(CC) $(LFLAGS) -o makegen $(OBJS) $(LIBS)
+makegen: makegen.o Writer.o
+	$(GCC) $(LFLAGS) -o makegen $^ $(LIBS)
 
 makegen.o: makegen.cc Makefile.h
+	$(GCC) $(CFLAGS) -c -o $@ $<
+
+Writer.o: Writer.cc Writer.h
 	$(GCC) $(CFLAGS) -c -o $@ $<
 
 clean:
