@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Makefile.h"
+#include "MakefileStruct.h"
 
 // reads the current directory for a makefile
 // fills the returned struct in with contents of makefile flags

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Makefile.h"
+#include "MakefileStruct.h"
 
 // Iterate through all files in the current directory.
     // If the current file's extension is not one of .c, .cc, or .cpp, skip it

@@ -1,4 +1,4 @@
-#include "Makefile.h"
+#include "MakefileStruct.h"
 
 string default_cc("gcc");
 string default_gcc("g++");

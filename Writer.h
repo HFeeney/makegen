@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Makefile.h"
+#include "MakefileStruct.h"
 
 // writes the gven makefile struct to a file
 // Throws io_error* on failure, client is responsible for deleting exception

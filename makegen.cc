@@ -5,6 +5,7 @@
 #include "Reader.h"
 #include "Crawler.h"
 #include "Writer.h"
+#include "MakefileStruct.h"
 
 using std::cout;
 using std::endl;
