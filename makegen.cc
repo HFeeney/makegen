@@ -72,6 +72,8 @@ int main(int argc, char** argv) {
                 default_libs = field;
                 continue;
             }
+            field--;
+            *field = '=';
         }
         
         // invalid argument
