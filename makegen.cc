@@ -91,7 +91,7 @@ int main(int argc, char** argv) {
         // write
         write_makefile(m);
     } catch (runtime_error* re) {
-        cout << re->what();
+        cout << re->what() << endl;
         delete re;
         return EXIT_FAILURE;
     }
