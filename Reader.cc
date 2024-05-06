@@ -17,7 +17,7 @@ void read_makefile(Makefile& m) {
         while (std::getline(file, line)) {
             // If the line contains a colon, assume a rule has been
             // encountered and exit the file.
-            if (line.find(':') == string::npos) {
+            if (line.find(':') != string::npos) {
                 break;
             }
 

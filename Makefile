@@ -14,22 +14,22 @@ build: all
 
 all: makegen
 
-makegen: makegen.o Reader.o Crawler.o Writer.o MakefileStruct.o
+makegen: makegen.o Crawler.o MakefileStruct.o Reader.o Writer.o
 	$(GCC) $(LFLAGS) -o $@ $^ $(LIBS)
 
-makegen.o: makegen.cc MakefileStruct.h
+Crawler.o: Crawler.cc Crawler.h MakefileStruct.h Filename.h
 	$(GCC) $(CFLAGS) -c -o $@ $<
 
-Reader.o: Reader.cc Reader.h MakefileStruct.h
+MakefileStruct.o: MakefileStruct.cc MakefileStruct.h Filename.h
 	$(GCC) $(CFLAGS) -c -o $@ $<
 
-Crawler.o: Crawler.cc Crawler.h MakefileStruct.h
+makegen.o: makegen.cc Reader.h MakefileStruct.h Filename.h Crawler.h Writer.h
 	$(GCC) $(CFLAGS) -c -o $@ $<
 
-Writer.o: Writer.cc Writer.h MakefileStruct.h
+Reader.o: Reader.cc Reader.h MakefileStruct.h Filename.h
 	$(GCC) $(CFLAGS) -c -o $@ $<
 
-MakefileStruct.o: MakefileStruct.cc MakefileStruct.h
+Writer.o: Writer.cc Writer.h MakefileStruct.h Filename.h io_error.h
 	$(GCC) $(CFLAGS) -c -o $@ $<
 
 clean:
