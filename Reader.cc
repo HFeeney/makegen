@@ -34,7 +34,7 @@ void read_makefile(Makefile& m) {
             // should be initialized with the rest of the line.
             if (left_side == "CC") {
                 m.cc = right_side;
-            } else if (left_side == "GCC") {
+            } else if (left_side == "CXX") {
                 m.gcc = right_side;
             } else if (left_side == "BFLAGS") {
                 m.bflags = right_side;

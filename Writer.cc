@@ -52,7 +52,7 @@ void write_makefile(Makefile& MFstruct) {
 
     // print variables
     MFfile << "CC=" << MFstruct.cc << endl;
-    MFfile << "GCC=" << MFstruct.gcc << endl;
+    MFfile << "CXX=" << MFstruct.gcc << endl;
     MFfile << "CFLAGS=" << MFstruct.cflags << endl;
     MFfile << "DFLAGS=" << MFstruct.dflags << endl;
     MFfile << "BFLAGS=" << MFstruct.bflags << endl;
@@ -87,16 +87,18 @@ void write_makefile(Makefile& MFstruct) {
         }
         MFfile << endl;
         MFfile << "\t$(";
-        if (nonMainsRequireGCC || requiresGCC(main)) MFfile << "G";
-        MFfile << "CC) $(LFLAGS) -o $@ $^ $(LIBS)" << endl << endl;
+        if (nonMainsRequireGCC || requiresGCC(main)) MFfile << "CXX";
+        else MFfile << "CC";
+        MFfile << ") $(LFLAGS) -o $@ $^ $(LIBS)" << endl << endl;
     }
 
     // print compilation rules
     for (string& rule : MFstruct.prod_rules) {
         MFfile << rule << endl;
         MFfile << "\t$(";
-        if (requiresGCC(rule)) MFfile << "G";
-        MFfile << "CC) $(CFLAGS) -c -o $@ $<" << endl << endl;
+        if (requiresGCC(rule)) MFfile << "CXX";
+        else MFfile << "CC";
+        MFfile << ") $(CFLAGS) -c -o $@ $<" << endl << endl;
     }
 
     MFfile << "clean:" << endl;
