@@ -34,14 +34,28 @@ void crawl_files(Makefile& makefile) {
 			suffixLen = 3;
 		} else continue;
 		std::string::size_type nameStart = relPath.find_last_of(path::preferred_separator) + 1;
-		std::string::size_type nameLen = relPath.length() - nameStart - suffixLen;
+		std::string::size_type nameLen = relPath.length() - nameStart - suffixLen - 1;
 		internalName.root = relPath.substr(nameStart, nameLen);
 
 		// build make rule
 		bp::ipstream cppOutput;
 		bp::child cpp(bp::search_path(C_PREPROCESSOR), C_PREPROCESSOR_ARGS, relPath, bp::std_out > cppOutput);
 		string line;
-		getline(cppOutput, line);
+		string subline;
+		while (true) {
+			getline(cppOutput, subline);
+			if (subline.back() == '\\') {
+				// remove ' \' from line
+				subline = subline.substr(0, subline.length() - 2);
+				line.append(subline);
+			}
+			else {
+				line.append(subline);
+				break;
+			}
+		}
+		
+		
 		cpp.wait();
 		makefile.prod_rules.push_back(line);
 
