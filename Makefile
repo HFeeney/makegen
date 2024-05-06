@@ -4,7 +4,7 @@ CFLAGS=--std=c++20
 DFLAGS=-g -Og
 BFLAGS=-O2
 LFLAGS=
-LIBS=
+LIBS=-lboost_filesystem
 
 debug: override CFLAGS+=$(DFLAGS)
 debug: all

@@ -1,10 +1,19 @@
 #include <filesystem>
 #include <iostream>
 
+#include <boost/process.hpp>
+
 #include "Crawler.h"
+
+#define C_PREPROCESSOR "cpp"
+#define C_PREPROCESSOR_ARGS "-MM"
+#define GREP_SEARCHER "grep"
+#define GREP_SEARCHER_ARGS "-cE"
+#define MAIN_REGEX "int +main *\\( *int +.*(, *char *\\*{1,2} *.*(\\[\\])? *){1,2}\\)"
 
 using namespace std;
 using namespace filesystem;
+namespace bp = boost::process;
 
 void crawl_files(Makefile& makefile) {
 	// loop through files
@@ -29,7 +38,19 @@ void crawl_files(Makefile& makefile) {
 		internalName.root = relPath.substr(nameStart, nameLen);
 
 		// build make rule
+		bp::ipstream cppOutput;
+		bp::child cpp(bp::search_path(C_PREPROCESSOR), C_PREPROCESSOR_ARGS, relPath, bp::std_out > cppOutput);
+		string line;
+		getline(cppOutput, line);
+		cpp.wait();
+		makefile.prod_rules.push_back(line);
 
 		// check is main
+		int res = bp::system(bp::search_path(GREP_SEARCHER), GREP_SEARCHER_ARGS, MAIN_REGEX, relPath, bp::std_out > bp::null);
+		if (!res) {
+			makefile.mains.push_back(internalName);
+		} else {
+			makefile.non_mains.push_back(internalName);
+		}
 	}
 }
