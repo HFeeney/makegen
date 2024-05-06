@@ -1,6 +1,6 @@
 CC=gcc
 GCC=g++
-CFLAGS=
+CFLAGS=--std=c++20
 DFLAGS=-g -Og
 BFLAGS=-O2
 LFLAGS=
