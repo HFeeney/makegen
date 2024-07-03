@@ -9,7 +9,7 @@
 #define C_PREPROCESSOR_ARGS "-MM"
 #define GREP_SEARCHER "grep"
 #define GREP_SEARCHER_ARGS "-cE"
-#define MAIN_REGEX "int +main *\\( *int +.*(, *char *\\*{1,2} *.*(\\[\\])? *){1,2}\\)"
+#define MAIN_REGEX "int +main *\\(.*\\)"
 
 using namespace std;
 using namespace filesystem;
